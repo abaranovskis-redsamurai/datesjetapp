@@ -14,12 +14,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojdatetimepicker', 'ojs/ojlabel
 
       self.currentDate = ko.observable(oj.IntlConverterUtils.dateToLocalIso(new Date()));
 
-      var dateConverterFactory = oj.Validation.converterFactory("datetime");
-      self.dateConverter = dateConverterFactory.createConverter();
+      var dateConverterFactory = oj.Validation.converterFactory(oj.ConverterFactory.CONVERTER_TYPE_DATETIME);
+      self.dateConverter = dateConverterFactory.createConverter({pattern: "yyyy-MM-dd"});
 
       self.processDate = function () {
         var date = oj.IntlConverterUtils.isoToDate(self.currentDate());
-        var tomorrow = new Date(date.toLocaleDateString("en-US"));
+        var tomorrow = new Date(date);
         tomorrow.setDate(date.getDate() + 1);
         console.log(tomorrow);
       }
